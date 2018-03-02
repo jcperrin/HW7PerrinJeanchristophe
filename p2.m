@@ -26,5 +26,20 @@ disp(weights);
 %% Approximate Integral
 % Use your method to approximate:
 % $$ \int_4^9 \frac{sin(x)}{\sqrt{25x-(x+6)^2}} dx $$
+%
+% After substituting in z for x and rearranging we arrive at the following
+% expression for g(x). A full derivation can be found in the accompanying
+% hand-written notes.
 
+g = @(x) sin((5*x+13)/2);
+
+%%
+% Now we can use the quadrature rule from above with the weights that we
+% found earlier.
+
+xVals = [-1:1]';
+fnEvals = g(xVals);
+integralApproximation = weights' * fnEvals;
+
+disp(integralApproximation);
 

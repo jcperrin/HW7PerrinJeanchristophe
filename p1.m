@@ -41,7 +41,6 @@ intConst = h/3*(fnEvals(1) + 4*sum(oddInteriorPoints) ...
                 + 2*sum(evenInteriorPoints) + fnEvals(end));
 
 fprintf(' Integral (const width): %.4f\n', intConst);
-
 %% Unevenly Spaced Points
 % The spacing of our abscissae is given by the following equation.
 
@@ -70,13 +69,9 @@ for firstIndex = 1:2:length(abscissae)-2
     thisH1 = h(firstIndex+1);
     thisInterval = thisH0+thisH1;
 
-    weight1 = thisInterval^2 /3/thisH0 ;
-    weight1 = weight1 - (2*thisH0+thisH1)/2*thisInterval/thisH0;
-    weight1 = weight1 + thisInterval;
-
-    weight2 = -thisInterval^3/6/thisH0/thisH1;
-
-    weight3 = thisInterval^2/3/thisH1 - thisInterval/2;
+    weight1 = thisInterval/6 * (2-thisH1/thisH0);
+    weight2 = -thisInterval^3/(6*thisH0*thisH1);
+    weight3 = thisInterval/6*(2-thisH0/thisH1);
     
     integralVarh = integralVarh + [weight1 weight2 weight3]*theseYs;
 end % loop over all panes
